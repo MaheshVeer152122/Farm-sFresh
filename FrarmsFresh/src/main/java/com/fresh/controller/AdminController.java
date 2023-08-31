@@ -134,6 +134,8 @@ public class AdminController {
 	public ResponseEntity<?> categorylist() {
 		System.out.println("in categorylist");
 		List<Category> list = service.getAllCategory();
+		if(list.isEmpty())
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		return new ResponseEntity<List<Category>>(list, HttpStatus.OK);
 	}
 	
@@ -141,6 +143,8 @@ public class AdminController {
 	public ResponseEntity<?> getAllOrders(){
 		System.out.println("in getAllOrders");
 		List<OrderDetails> list = service.getAllOrders();
+		if(list.isEmpty())
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		return new ResponseEntity<List<OrderDetails>>(list, HttpStatus.OK);
 	}
 	
@@ -148,6 +152,8 @@ public class AdminController {
 	public ResponseEntity<?> getAllUsers(){
 		System.out.println("in getAllUsers");
 		List<User> list = service.getAllUser();
+		if(list.isEmpty())
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		return new ResponseEntity<List<User>>(list, HttpStatus.OK);
 	}
 	
