@@ -27,6 +27,8 @@ public class FarmerController {
 	public ResponseEntity<?> farmersList() {
 		System.out.println("in getFarmersList");
 		List<Farmer> list = f_service.getFarmersList();
+		if(list.isEmpty())
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		return new ResponseEntity<List<Farmer>>(list, HttpStatus.OK);
 	}
 
@@ -38,12 +40,16 @@ public class FarmerController {
 	@GetMapping("/products/{farmerid}")
 	public ResponseEntity<?> stockDetails(@PathVariable int farmerid) {
 		List<StockDetails> products = f_service.getFarmerStock(farmerid);
+		if(products.isEmpty())
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		return new ResponseEntity<List<StockDetails>>(products, HttpStatus.OK);
 	}
 
 	@GetMapping("/products/{farmerid}/{productid}")
 	public ResponseEntity<?> productDetails(@PathVariable int farmerid, @PathVariable int productid) {
 		StockDetails product = f_service.getProductDetails(farmerid, productid);
+		if(product == null)
+			return new ResponseEntity<>(HttpStatus.);
 		return new ResponseEntity<StockDetails>(product, HttpStatus.OK);
 	}
 	
@@ -51,6 +57,8 @@ public class FarmerController {
 	public ResponseEntity<?> productlist() {
 		System.out.println("in productlist");
 		List<StockDetails> list = f_service.getAllProduct();
+		if(list.isEmpty())
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		return new ResponseEntity<List<StockDetails>>(list, HttpStatus.OK);
 	}
 
